@@ -1,0 +1,5 @@
+{
+    "name": "finance-manager",
+    "forwardPorts": [3000]
+  }
+  
