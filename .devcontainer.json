@@ -1,5 +1,14 @@
 {
     "name": "finance-manager",
-    "forwardPorts": [3000]
+    "forwardPorts": [
+        3000
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "sudoaugustin.tailwindcss-transpiler"
+            ]
+        }
+    }
   }
   
