@@ -60,16 +60,6 @@ export const transactionColumns: ColumnDef<transaction>[] = [
   },
 
   {
-    accessorKey: "amount",
-    header: "Valor",
-    cell: ({ row: { original: transaction } }) =>
-      new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      }).format(Number(transaction.amount)),
-  },
-
-  {
     accessorKey: "actions",
     header: "Ações",
     cell: () => {
