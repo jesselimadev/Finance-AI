@@ -66,6 +66,30 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  /* Estiliza a barra de rolagem */
+  body::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Estiliza a parte interna da barra de rolagem */
+  body::-webkit-scrollbar-thumb {
+    background: #1a1818;
+    border-radius: 4px;
+  }
+
+  /* Estiliza a barra de rolagem ao passar o mouse */
+  body::-webkit-scrollbar-thumb:hover {
+    background: #151b15;
+  
+  }
+
+  /* Estiliza o contêiner principal */
+  .container {
+    max-height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin; /* Para navegadores Firefox */
+  }
 }
 
 @layer base {
