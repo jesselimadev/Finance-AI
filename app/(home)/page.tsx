@@ -4,8 +4,10 @@ import SummaryCards from "./_components/summary-cards";
 import TimeSelect from "./_components/time-select";
 import { isMatch } from "date-fns";
 import TransactionsPieChart from "./_components/transactions-pie-chart";
+
 import { getDashboard } from "../_data/get-dashboard";
 import { auth } from "@clerk/nextjs/server";
+import ExpensesPerCategory from "./_components/expenses-per-category";
 
 interface HomeProps {
   searchParams: {
@@ -23,6 +25,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
     redirect(`?month=${new Date().getMonth() + 1}`);
   }
   const dashboard = await getDashboard(month);
+  console.log(dashboard.totalExpensePerCategory); // Verifique os dados aqui
   return (
     <>
       <Navbar />
@@ -36,10 +39,13 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
         <div className="grid h-full grid-cols-[2fr,1fr] gap-6 overflow-hidden">
           <div className="flex flex-col gap-6 overflow-hidden">
             <SummaryCards month={month} {...dashboard} />
-            <div className="grid h-full grid-cols-3 grid-rows-1 gap-6">
-              <div className="col-span- custom-scrollbar h-full max-h-40 overflow-y-auto">
+            <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
+              <div className="col-span- custom-scrollbar h-full max-h-full overflow-y-auto">
                 <TransactionsPieChart {...dashboard} />
               </div>
+              <ExpensesPerCategory
+                expensesPerCategory={dashboard.totalExpensePerCategory}
+              />
             </div>
           </div>
         </div>
