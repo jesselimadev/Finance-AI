@@ -17,8 +17,8 @@ export const createStripeCheckout = async () => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "subscription",
-    success_url: "http://localhost:3000", // Corrigido
-    cancel_url: "http://localhost:3000", // Corrigido
+    success_url: "https://upgraded-acorn-v6rp7pxq76rpcw6p-3000.app.github.dev/", // Corrigido
+    cancel_url: "https://upgraded-acorn-v6rp7pxq76rpcw6p-3000.app.github.dev/", // Corrigido
     subscription_data: {
       metadata: {
         clerk_user_id: userId,
