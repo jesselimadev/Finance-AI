@@ -9,6 +9,7 @@ import { getDashboard } from "../_data/get-dashboard";
 import { auth } from "@clerk/nextjs/server";
 import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransactions from "./_components/last-transactions";
+import { canUserAddTransaction } from "../_data/can-user-add-transaction";
 
 interface HomeProps {
   searchParams: {
@@ -26,6 +27,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
     redirect(`?month=${new Date().getMonth() + 1}`);
   }
   const dashboard = await getDashboard(month);
+  const userCanAddTransaction = await canUserAddTransaction();
   console.log(dashboard.totalExpensePerCategory); // Verifique os dados aqui
   return (
     <>
@@ -39,7 +41,11 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
         </div>
         <div className="grid h-full grid-cols-[2fr,1fr] gap-6 overflow-hidden">
           <div className="flex flex-col gap-6 overflow-hidden">
-            <SummaryCards month={month} {...dashboard} />
+            <SummaryCards
+              month={month}
+              {...dashboard}
+              userCanAddTransaction={userCanAddTransaction}
+            />
             <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
               <div className="col-span- custom-scrollbar h-full max-h-full overflow-y-auto">
                 <TransactionsPieChart {...dashboard} />
